@@ -1,4 +1,4 @@
-#include "std_lib_facilities.h"
+#include "../../../std_lib_facilities.h"
 
 /* 
     최빈값 출력
@@ -40,7 +40,7 @@ int main()
         cout << "Sum of nums: " << sum / 100 << " m\n";
         cout << "The num of nums: " << nums.size() << "\n\n";
     }
-    cout << "입력받은 값들: ";
+    cout << "입력받은 값들(m): ";
     for (double n : nums)
     {
         cout << n << " ";
