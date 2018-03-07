@@ -1,4 +1,0 @@
-C:\Users\LEE\atom_projects\raspberry_server\server.c:2:24: fatal error: sys/socket.h: No such file or directory
- #include <sys/socket.h>
-                        ^
-compilation terminated.
