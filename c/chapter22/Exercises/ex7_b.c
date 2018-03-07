@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
             fputc(content, fpout);
         }
     }
+    printf("done\n");
 
     fclose(fpin);
     fclose(fpout);
@@ -59,13 +60,13 @@ char *make_output_filename(char *arg)
     const char *ext = ".uncompressed_file";
     char *fnout;
 
-    fnout = (char *) malloc(sizeof(char) * (sizeof(arg) + sizeof(ext) + 1));
+    fnout = (char *) malloc(sizeof(char) * (strlen(arg) + strlen(ext) + 1));
     memset(fnout, 0, strlen(fnout));
     strncpy(fnout, arg, strlen(arg)+1);
     char *ptr = fnout;
     ptr = strrchr(ptr, '.');
     *ptr = '\0';
-    strncat(ptr, ext, strlen(fnout) + strlen(ext));
+    strncat(ptr, ext, strlen(ext)+1);
 
     return fnout;
 }
@@ -76,8 +77,8 @@ bool is_compressed_file(char *arg)
     bool is_cf = true;
 
     // string ³¡À» °¡¸®Å´
-    arg = arg + strlen(arg) + 1;
-    ext = ext + strlen(ext) + 1;
+    arg = arg + strlen(arg) - 1;
+    ext = ext + strlen(ext) - 1;
     
     while (*arg && *ext)
     {
