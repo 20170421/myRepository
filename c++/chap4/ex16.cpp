@@ -7,7 +7,7 @@
 int main()
 {
     String unit; // operater
-    double a, sum;
+    double a, sum, mode;
     Vector<double> nums;
 
     while (cin >> a >> unit)
@@ -46,4 +46,5 @@ int main()
         cout << n << " ";
     }
     cout << "\n";
+    //cout << "ÃÖºó°ª: " << mode << "\n"; //TODO: ÃÖºó°ª ±¸Çö
 }
