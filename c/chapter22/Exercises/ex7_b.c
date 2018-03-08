@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include <assert.h>
 
 bool is_compressed_file(char *arg);
 char *make_output_filename(char *arg);
@@ -27,13 +26,13 @@ int main(int argc, char *argv[])
 
     if ((fpin = fopen(argv[1], "rb")) == NULL)
     {
-        fprintf(stderr, "[x] error occured in fopen()\n");
+        fprintf(stderr, "[x] error occured in fopen(fpin)\n");
         exit(EXIT_FAILURE);
     }
     fnout = make_output_filename(argv[1]);
     if ((fpout = fopen(fnout, "wb")) == NULL)
     {
-        fprintf(stderr, "[x] error occured in fopen()\n");
+        fprintf(stderr, "[x] error occured in fopen(fpout)\n");
         exit(EXIT_FAILURE);
     }
 
@@ -61,6 +60,11 @@ char *make_output_filename(char *arg)
     char *fnout;
 
     fnout = (char *) malloc(sizeof(char) * (strlen(arg) + strlen(ext) + 1));
+    if (fnout == NULL)
+    {
+        fprintf(stderr, "error occured in malloc(fnout)\n");
+        exit(EXIT_FAILURE);
+    }
     memset(fnout, 0, strlen(fnout));
     strncpy(fnout, arg, strlen(arg)+1);
     char *ptr = fnout;
