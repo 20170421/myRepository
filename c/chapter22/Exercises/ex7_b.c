@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
         cnt = fgetc(fpin); // 첫번째 바이트
         if (feof(fpin))
             break;
-        content = fgetc(fpin); // 두번째 바이트       
+        content = fgetc(fpin); // 두번째 바이트
         for (int i = 0; i < cnt; i++)
         {
             fputc(content, fpout);
@@ -59,18 +59,18 @@ char *make_output_filename(char *arg)
     const char *ext = ".uncompressed_file";
     char *fnout;
 
-    fnout = (char *) malloc(sizeof(char) * (strlen(arg) + strlen(ext) + 1));
+    fnout = (char *)malloc(sizeof(char) * (strlen(arg) + strlen(ext) + 1));
     if (fnout == NULL)
     {
         fprintf(stderr, "error occured in malloc(fnout)\n");
         exit(EXIT_FAILURE);
     }
     memset(fnout, 0, strlen(fnout));
-    strncpy(fnout, arg, strlen(arg)+1);
+    strncpy(fnout, arg, strlen(arg) + 1);
     char *ptr = fnout;
     ptr = strrchr(ptr, '.');
     *ptr = '\0';
-    strncat(ptr, ext, strlen(ext)+1);
+    strncat(ptr, ext, strlen(ext) + 1);
 
     return fnout;
 }
@@ -83,7 +83,7 @@ bool is_compressed_file(char *arg)
     // string 끝을 가리킴
     arg = arg + strlen(arg) - 1;
     ext = ext + strlen(ext) - 1;
-    
+
     while (*arg && *ext)
     {
         if (*arg != *ext)
@@ -91,7 +91,8 @@ bool is_compressed_file(char *arg)
             is_cf = false;
             break;
         }
-        arg--; ext--;
+        arg--;
+        ext--;
     }
 
     return is_cf;
