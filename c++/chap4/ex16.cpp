@@ -6,8 +6,9 @@
 
 int main()
 {
-    String unit; // operater
-    double a, sum, mode;
+    String unit; // 연산자
+    double a, sum;
+    double mode, count, freq; // 최빈값과 빈도수
     Vector<double> nums;
 
     while (cin >> a >> unit)
@@ -45,6 +46,19 @@ int main()
     {
         cout << n << " ";
     }
+
+    count = 0; freq = 1;
+    for (int i=0; i<nums.size()-1; ++i)
+    {
+        if (nums[i] == nums[i+1])
+            freq++;
+        if (freq > count)
+        {
+            mode = nums[i];
+            count = freq;
+            freq = 1;
+        }
+    }
     cout << "\n";
-    //cout << "최빈값: " << mode << "\n"; //TODO: 최빈값 구현
+    cout << "최빈값: " << mode << "빈도수: " << count << "\n"; // TODO: 빈도수가 같은 값일 경우
 }
