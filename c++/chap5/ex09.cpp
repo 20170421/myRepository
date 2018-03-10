@@ -1,19 +1,26 @@
 #include "../../../std_lib_facilities.h"
 
-class Out_of_bound { }; // vectorë²”ìœ„ë¥¼ ë„˜ì–´ì„  ì ‘ê·¼ì— ëŒ€í•œ ì˜ˆì™¸
-class Out_of_integer { }; // int ë²”ìœ„ë¥¼ ë„˜ì–´ì„  ê°’ì— ëŒ€í•œ ì˜ˆì™¸ 
+class Out_of_bound { }; // vector¹üÀ§¸¦ ³Ñ¾î¼± Á¢±Ù¿¡ ´ëÇÑ ¿¹¿Ü
+class Out_of_integer { }; // int ¹üÀ§¸¦ ³Ñ¾î¼± °ª¿¡ ´ëÇÑ ¿¹¿Ü 
 
-double sum(int bound, vector<double> vec)
+double sum(int bound, const vector<double> vec)
 {
-    double sum;
+    double sum = 0, previous = 0, num;
     
     if (bound > vec.size())
         throw Out_of_bound();
     
-    sum = 0;
     for (int i=0; i<bound; ++i)
     {
-        sum += vec[i];
+        if (i == 0)
+        {
+            previous = vec[i];
+            sum += previous;
+        }
+        else
+        {
+            sum += (previous - vec[i]);
+        }
         if (sum < 0)
             throw Out_of_integer();
     }
@@ -27,45 +34,62 @@ int main()
     int bound;
     double number, previous = 0, result = 0;
 
-    cout << "í•©ê³„ë¥¼ êµ¬í•  ìˆ«ìì˜ ê°œìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”.\n";
+    cout << "ÇÕ°è¸¦ ±¸ÇÒ ¼ıÀÚÀÇ °³¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä.\n";
     while (cin >> bound)
     {
         if (bound < 0)
-            cout << "ê°œìˆ˜ëŠ” 0 ì´ìƒì…ë‹ˆë‹¤. \n";
+            cout << "°³¼ö´Â 0 ÀÌ»óÀÔ´Ï´Ù. \n";
         else
             break;
-        cout << "í•©ê³„ë¥¼ êµ¬í•  ìˆ«ìì˜ ê°œìˆ˜ë¥¼ ì…ë ¥í•˜ì„¸ìš”.\n";
+        cout << "ÇÕ°è¸¦ ±¸ÇÒ ¼ıÀÚÀÇ °³¼ö¸¦ ÀÔ·ÂÇÏ¼¼¿ä.\n";
     }
 
-    cout << "doubleí˜• ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš” ('|'ë¡œ ì…ë ¥ ì¢…ë£Œ)\n";
+    cout << "doubleÇü ¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä ('|'·Î ÀÔ·Â Á¾·á)\n";
     while (cin >> number)
     {
         if (number == '|')
             break;
-        if (numbers.size() > 0)
+        if (numbers.size() == 0)
+        {
+            numbers.push_back(number);
+        }
+        else
+        {
             previous = numbers[numbers.size()-1];
-        numbers.push_back(previous - number);
+            numbers.push_back(previous - number);
+        }
     }
 
+    previous = 0;
     try
     {
         result = sum(bound, numbers);
-        cout << "ì• ìˆ«ì " << bound << "ê°œ ( ";
+        cout << "¾Õ ¼ıÀÚ " << bound << "°³ ( ";
         for (int i=0; i<bound; ++i)
-            cout << numbers[i] << " ";
-        cout << ")ì˜ í•©ì€ " << result << "ì…ë‹ˆë‹¤.";
+        {
+            if (i == 0)
+            {
+                cout << numbers[i] << " ";
+                previous = numbers[i];
+            }
+            else
+            {
+                cout << previous - numbers[i] << " ";
+            }
+        }
+        cout << ")ÀÇ ÇÕÀº " << result << "ÀÔ´Ï´Ù.";
     }
     catch (Out_of_bound)
     {
-        error("ë²”ìœ„ë¥¼ ë„˜ì—ˆìŠµë‹ˆë‹¤.");
+        error("¹üÀ§¸¦ ³Ñ¾ú½À´Ï´Ù.");
     }
     catch (Out_of_integer)
     {
-        error("ê²°ê³¼ê°’ì´ í‘œí˜„í•  ìˆ˜ ìˆëŠ” ë²”ìœ„ë¥¼ ë„˜ì–´ì„°ìŠµë‹ˆë‹¤.");
+        error("°á°ú°ªÀÌ Ç¥ÇöÇÒ ¼ö ÀÖ´Â ¹üÀ§¸¦ ³Ñ¾î¼¹½À´Ï´Ù.");
     }
     catch (...)
     {
-        error("ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜ì…ë‹ˆë‹¤.");
+        error("¾Ë ¼ö ¾ø´Â ¿À·ùÀÔ´Ï´Ù.");
     }
     
     return 0;
