@@ -1,2 +1,3 @@
 **/*.exe
 **/*.json
+FileRenamer/file_renamer.c
