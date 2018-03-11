@@ -5,7 +5,7 @@ class Out_of_integer { }; // int 범위를 넘어선 값에 대한 예외
 
 double sum(int bound, const vector<double> vec)
 {
-    double sum = 0, previous = 0, num;
+    double sum = 0;
     
     if (bound > vec.size())
         throw Out_of_bound();
@@ -14,12 +14,11 @@ double sum(int bound, const vector<double> vec)
     {
         if (i == 0)
         {
-            previous = vec[i];
-            sum += previous;
+            sum += vec[0];
         }
         else
         {
-            sum += (previous - vec[i]);
+            sum += (vec[i-1] - vec[i]);
         }
         if (sum < 0)
             throw Out_of_integer();
@@ -60,7 +59,6 @@ int main()
         }
     }
 
-    previous = 0;
     try
     {
         result = sum(bound, numbers);
@@ -70,11 +68,10 @@ int main()
             if (i == 0)
             {
                 cout << numbers[i] << " ";
-                previous = numbers[i];
             }
             else
             {
-                cout << previous - numbers[i] << " ";
+                cout << numbers[i-1] - numbers[i] << " ";
             }
         }
         cout << ")의 합은 " << result << "입니다.";
