@@ -6,14 +6,11 @@ int main()
     const vector<string> days2 = { "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday" };
     const vector<string> days3 = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
 
-    vector<int> mon;
-    vector<int> tue;
-    vector<int> wed;
-    vector<int> thu;
-    vector<int> fri;
-    vector<int> sat;
-    vector<int> sun;
-    int mon_num, tue_num, wed_num, thu_num, fri_num, sat_num, sun_num;
+    vector<vector<int> > days_nums(7);
+    for (int i=0; i<7; ++i) {
+        vector<int> days;
+        days_nums.push_back(days);
+    }
 
     string day;
     int num, error_cnt = 0;
@@ -30,19 +27,19 @@ int main()
             if (day == days1[i] || day == days2[i] || day == days3[i]) {
                 is_correct = true;
                 switch (i) {
-                    case 0: mon.push_back(num); mon_num += num;
+                    case 0: days_nums[0].push_back(num);
                         break;
-                    case 1: tue.push_back(num); tue_num += num;
+                    case 1: days_nums[1].push_back(num);
                         break;                    
-                    case 2: wed.push_back(num); wed_num += num;
+                    case 2: days_nums[2].push_back(num);
                         break;                                            
-                    case 3: thu.push_back(num); thu_num += num;
+                    case 3: days_nums[3].push_back(num);
                         break;                                        
-                    case 4: fri.push_back(num); fri_num += num;
+                    case 4: days_nums[4].push_back(num);
                         break;                                        
-                    case 5: sat.push_back(num); sat_num += num;
+                    case 5: days_nums[5].push_back(num);
                         break;                                        
-                    case 6: sun.push_back(num); sun_num += num;
+                    case 6: days_nums[6].push_back(num);
                         break;                           
                 }
             }
@@ -52,6 +49,18 @@ int main()
         is_correct = false;
     }
 
+    int sum;
+    cout << "입력받은 값 출력\n";
+    for (int i=0; i<7; ++i) {
+        sum = 0;
+        cout << days1[i] << "\n";
+        for (int j=0; j<days_nums[i].size(); ++j) {
+            cout << days_nums[i][j] << " ";
+            sum += days_nums[i][j];
+        }
+        cout << "\n";
+        cout << days1[i] << "의 합계 : " << sum << "\n";
+    }
     cout << "거부된 값의 개수 : " << error_cnt << "\n";
     
     return 0;
