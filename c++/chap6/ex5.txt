@@ -1,0 +1,20 @@
+
+Sentence:
+    Noun Verb
+    Sentence Conjuncion Sentence
+
+Conjuncion:
+    "and"
+    "or"
+    "but"
+
+Noun:
+    "the" Noun
+    "birds"
+    "fish"
+    "C++"
+
+Verb:
+    "rules"
+    "fly"
+    "swim"

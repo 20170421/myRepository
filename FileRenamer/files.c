@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <windows.h>
-
-#include "files.h"
-
 void print_files(char *file_path)
 {
     HANDLE hFind;
